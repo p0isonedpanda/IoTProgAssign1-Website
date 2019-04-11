@@ -8,3 +8,4 @@ This site uses Node-RED for both hosting the website and managing data flow betw
 - npm
 - Node RED `sudo npm install -g --unsafe-perm node-red`
 - Node RED Arduino `npm install node-red-node-arduino`
+- Node RED Dashboard `npm install node-red-dashboard`
