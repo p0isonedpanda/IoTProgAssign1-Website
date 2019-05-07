@@ -28,8 +28,16 @@ int process_input()
 //tell the arduino to beep x times (controlled by stage variable)
 void play_level(int stage, int wait_time, int length)
 {
+    //conversion to milliseconds
+    int _wait_time = wait_time * 1000;
+    int _length = length * 1000;
+    int pitch = 1000; //change this if want to increase difficulty.
     for (int i = 0; i < stage; i++)
     {
+        tone(buzzer, pitch); // Send 1KHz sound signal...
+        delay(_length);         // ...for 1 sec
+        noTone(buzzer);      // Stop sound...
+        delay(_wait_time);         // ...for 1sec
         //tell the thing to beep (with wait_time between beeps, and length of beep)
         printf("beep ");
     }
@@ -39,7 +47,7 @@ void play_level(int stage, int wait_time, int length)
 void show_answer(int stage)
 {
     //TODO
-    printf("answer is %d\n",stage);
+    printf("answer is %d\n", stage);
 }
 
 //run through the level
@@ -70,17 +78,19 @@ void increase_difficulty(int scalar, int wait_time, int length)
     length -= scalar * 0.1;
 }
 
+const int buzzer = 9; //buzzer to arduino pin 9 SETTING
 int main()
 {
-int wait_time = 0.5; //time to wait between beeps, in seconds.
-int length = 0.4;    //length of time of beeps, in seconds.
+    pinMode(buzzer, OUTPUT); //
+    int wait_time = 0.5;     //time to wait between beeps, in seconds.
+    int length = 0.4;        //length of time of beeps, in seconds.
     //TODO add a scoring system.
     int current_stage = generate_stage();
     for (int i = 0; i < 5; i++)
     {
-        process_level(current_stage, wait_time,length);
+        process_level(current_stage, wait_time, length);
         increase_difficulty(i, wait_time, length);
     }
-return 0;
-scanf("Type anything to continue ");
+    return 0;
+    scanf("Type anything to continue ");
 }
