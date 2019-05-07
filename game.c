@@ -35,9 +35,9 @@ void play_level(int stage, int wait_time, int length)
     for (int i = 0; i < stage; i++)
     {
         tone(buzzer, pitch); // Send 1KHz sound signal...
-        delay(_length);         // ...for 1 sec
+        delay(_length);      // ...for 1 sec
         noTone(buzzer);      // Stop sound...
-        delay(_wait_time);         // ...for 1sec
+        delay(_wait_time);   // ...for 1sec
         //tell the thing to beep (with wait_time between beeps, and length of beep)
         printf("beep ");
     }
